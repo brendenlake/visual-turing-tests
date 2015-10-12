@@ -1,0 +1,227 @@
+<html>                                                                  
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />	
+<link rel="stylesheet" type="text/css" href="css/canvas.css"/>                                                                    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="exclude.js"></script>
+<script type="text/javascript" src="jquery.url.js"></script>
+<script type="text/javascript" src="extend_jquery.js"></script>
+<script type="text/javascript" src="taskutil.js"></script>
+<script type="text/javascript" src="image_preloader.js"></script>
+<script type="text/javascript" src="super_task.js"></script>
+<script type="text/javascript" src="sequential_task.js"></script>
+<script type="text/javascript" src="judge_task.js"></script>
+<script type="text/javascript" src="judge_new_alphabet.js"></script>
+
+<style>
+.image_border {
+  border: 2px solid red;	
+}
+.image_no_border {
+  border: 1px solid black;	
+}
+</style>
+
+<noscript>
+    <style type="text/css">
+        .pagecontainer {display:none;}
+    </style>
+    <div class="noscriptmsg">
+    Please enable JavaScript to continue.
+    </div>
+</noscript>
+</head>
+<body><div class="pagecontainer">
+
+<!-- PREAMBLE -->
+<span id="pre"></span>
+
+<!-- INSTRUCTIONS -->
+<DIV id="instruct"  style="" class="task_section">
+<div align="center">
+<h3>Visual Turing Test: Generating new concepts (from type)</h3>
+</div>
+
+<p>The display below shows 10 "example characters" from a foreign alphabet (like Chinese, Bengali, Sanskrit, etc.). We asked people to design new characters that appear to belong to the <b>same alphabet</b> as the example characters. We also gave this same task to a computer program that simulates how people design new characters.</p>
+
+<p> Can you tell which grid of images was drawn by 4 different people and which grid was drawn by a computer program?</p>
+
+People drew their characters with the following constraints:
+<ul>
+<li>They were asked not to directly copy the example characters.</li>    
+<li>They were only given 3 seconds to draw each character.</li>
+<li>They drew with their computer mice.</li>
+</ul>
+
+<p> You will see a sequence of <span class="ntrials">N</span> displays just like this one below. For each display, the foreign 	alphabet (and corresponding example characters) will change. The computer program's grid of images is randomly chosen to appear either on the left or the right. You will always be asked to indicate which grid the computer drew, using your keyboard's arrow keys. Please answer as accurately as you can.</p>
+
+<p>	<span id="instruct_feedback">***</span>.
+
+<center><b>Sample display</b></center>
+<div id="demo_screen" align="center" style="border: 1px solid black;">
+<br>
+<table border="0">
+<tr>
+	<td><center>Example characters from a foreign alphabet</center></td>
+</tr>
+<tr>	
+	<td><div id="demo_itarget"></div></td>
+</tr>
+</table>
+<br>
+<b>Please study the foreign alphabet above.</b><br>
+Both people and a computer program designed new characters for this alphabet.<br>
+One grid was designed by 4 different people, and the other grid was designed by a computer program.<br>
+<b>Which grid was drawn by the computer program?</b>
+<br><br>
+<table>
+<tr>
+	<td><div id="demo_ileft"></div></td>
+	<td><div id="demo_ispacer"></div></td>	
+	<td><div id="demo_iright"></div></td>
+</tr>
+</table>
+<br>
+Press &ltleft&gt or &ltright&gt using your arrow keys.
+<br><br>
+</div>
+
+<p><b>Images loaded: <span id="pload">0</span> percent.</b></p>
+<div align="center" id="toquiz" style="display:none;">
+<button onclick="task.start_quiz();">Continue</button>
+</div>
+<div align="center" id="return_exp" style="display:none;">
+	<br><br><div align="center" ><button onclick="task.return_to_exp();">Return to experiment</button></div>
+</div>
+</DIV>
+
+<!-- INSTRUCTIONS TEST -->
+
+<DIV id="instruct_test" style="display:none;" class="task_section">
+<FORM>
+<b>Instructions quiz.</b><br><br>
+
+The characters in each display are<br>
+<input type="radio" name="q1" value="0" class="qq">numbers<br>
+<input type="radio" name="q1" value="0">letters from the English alphabet<br>
+<input type="radio" name="q1" value="1">letters from a foreign alphabet<br>
+<input type="radio" name="q1" value="0">Egyptian hieroglphs<br><br>
+
+What were people instructed to do?<br>
+<input type="radio" name="q2" value="0" class="qq">design a new alphabet<br>
+<input type="radio" name="q2" value="1">design a new character in the style of an existing alphabet<br>
+<input type="radio" name="q2" value="0">design a new character that is easy to recognize<br>
+<input type="radio" name="q2" value="0">categorize characters into alphabets<br><br>
+
+The two images were drawn by<br>
+<input type="radio" name="q3" value="0" class="qq">people vs. aliens<br>
+<input type="radio" name="q3" value="0">adults vs. children<br>
+<input type="radio" name="q3" value="1">people vs. a computer program<br>
+<input type="radio" name="q3" value="0">two different computer programs<br><br>
+
+By pressing the arrow keys, you will always be asked to indicate the character drawn by the<br>
+<input type="radio" name="q4" value="0" class="qq">people<br>
+<input type="radio" name="q4" value="0">aliens<br>
+<input type="radio" name="q4" value="1">computer program<br>
+<input type="radio" name="q4" value="0">children<br><br>
+
+The alphabet changes on every display.<br>
+<input type="radio" name="q5" value="1" class="qq">true<br>
+<input type="radio" name="q5" value="0">false<br><br>
+
+People were told NOT to copy the example characters exactly.<br>
+<input type="radio" name="q6" value="1" class="qq">true<br>
+<input type="radio" name="q6" value="0">false<br>
+
+</FORM>
+
+<button onclick="task.check_quiz();">Proceed to task.</button>
+</DIV>
+
+<!-- EXPERIMENT SECTION -->
+<DIV id="exp"  style="display:none;" class="task_section">
+
+<div align="center">
+<span id="header"></span><br><br>
+</div>
+
+<div id="screen" align="center" style="">
+<table border="0">
+<tr>
+	<td><center>Example characters from a foreign alphabet</center></td>
+</tr>
+<tr>	
+	<td><div id="itarget"></div></td>
+</tr>
+</table>
+<br>
+<b>Please study the foreign alphabet above.</b><br>
+Both people and a computer program designed new characters for this alphabet.<br>
+One grid was designed by 4 different people, and the other grid was designed by a computer program.<br>
+<b>Which grid was drawn by the computer program?</b>
+<br><br>
+<table>
+<tr>
+	<td><div id="ileft"></div></td>
+	<td><div id="ispacer"></div></td>	
+	<td><div id="iright"></div></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<span id="message"></span><br>
+<span id="prompt"></span><br><br>
+<button onclick="task.review_instructions();">Review instructions</button>
+</div>
+
+</DIV>
+
+<!-- SURVEY SECTION -->
+<DIV id="survey" style="display:none;" class="task_section">
+	Your accuracy during the task was <b><span id="acc"></span> percent correct</b>.
+	<br><br>
+	What strategy did you use? How were the images drawn by the computer program
+	different than those drawn by humans? (required)<br>
+	<textarea id="survey_txt_strategy" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+	
+	What country do you currently reside in? (required)<br>
+    <input type="text" id="survey_txt_country" class="survey_txt"><br><br>
+	
+    Are you right-handed or left-handed? (required)<br>
+    <input type="radio" name="survey_radio_handed" value="right" class="survey_radio">right-handed
+    <input type="radio" name="survey_radio_handed" value="left">left-handed<br><br>
+
+	If you have more than one response to any of the following questions, please separate your responses by commas (,).
+	If you have no response, leave the text box blank.<br>
+	What is your native language? (required) <input type="text" id="survey_txt_native_lang" class="survey_txt"><br>
+	What other languages can you speak and write? <input type="text" id="survey_txt_write_lang" class="survey_txt"><br>
+	What other languages can you speak but not write? <input type="text" id="survey_txt_speak_lang" class="survey_txt"><br><br>
+
+    Were there any technical problems with the website? (required)<br>
+    <input type="radio" name="survey_radio_trouble" value="yes" class="survey_radio">Yes
+    <input type="radio" name="survey_radio_trouble" value="no">No<br>
+    If yes, please describe the problem as specifically as you can:<br>
+    <textarea id="survey_txt_trouble" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+    
+    Do you have any general comments? (optional)<br>
+    <textarea id="survey_txt_comments" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+
+<div id="check_survey" style="">
+	<button onclick="task.survey_finished();">Check survey</button>	
+</div>
+
+<div id="turk_form" style="display:none;">
+	<form name="myform" id="myform" action="" method="POST">
+    	<input id="myid"     type="hidden" name="assignmentId" value="">
+    	<input id="data"     type="hidden" name="data" value="">
+    	<input type="submit" name="mysubmit" value="Submit">
+	</form>
+</div>
+
+</DIV>
+
+</div></body>                                                                 
+</html>

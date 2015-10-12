@@ -1,0 +1,97 @@
+<!--
+Basic template for a Turk experiment.
+-->
+<html>                                                                  
+<head>
+<link rel="stylesheet" type="text/css" href="css/canvas.css" />                                                                    
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="jquery.url.js"></script>
+<script type="text/javascript" src="extend_jquery.js"></script>
+<script type="text/javascript" src="taskutil.js"></script>
+<script type="text/javascript" src="super_task.js"></script>
+<script type="text/javascript" src="sequential_task.js"></script>
+<script type="text/javascript" src="basic_task.js"></script>
+<script type="text/javascript" src="exclude.js"></script>
+</head>
+<body>
+
+<!-- PREAMBLE -->
+<span id="pre"></span>
+
+<!-- INSTRUCTIONS -->
+<DIV id="instruct"  style="" class="task_section">
+<div align="center">
+<h3>Instructions</h3>
+</div>
+<p> Place instructions here.</p>
+
+<div style="clear: both;">
+</div>
+
+<div style="" id="disclaimer"> 
+</div>
+
+<div align="center" id="to_quiz" style="">
+	<button onclick="task.start_quiz();">Continue to instructions quiz</button>
+</div>
+<div id="return_exp" style="display:none;">
+	<br><br><div align="center" ><button onclick="task.return_to_exp();">Return to experiment</button></div>
+</div>
+
+</DIV>
+
+<!-- INSTRUCTIONS TEST -->
+<DIV id="instruct_test" style="display:none;" class="task_section">
+<FORM>
+<b>Instructions quiz.</b><br><br>
+Question 1<br>
+<input type="radio" name="q1" value="1" class="qq">correct<br>
+<input type="radio" name="q1" value="0">wrong<br>
+<input type="radio" name="q1" value="0">wrong<br><br>
+
+Question 2<br>
+<input type="radio" name="q2" value="0" class="qq">wrong<br>
+<input type="radio" name="q2" value="1">correct<br>
+<input type="radio" name="q2" value="0">wrong<br><br>
+</FORM>
+
+<button onclick="task.check_quiz();">Proceed to task.</button>
+</DIV>
+
+<!-- EXPERIMENT SECTION -->
+<DIV id="exp"  style="display:none;" class="task_section">
+<span id="header"></span><br><br>
+<span id="stimulus"></span><br><br>
+<span id="message"></span><br>
+<span id="prompt"></span><br><br>
+<button onclick="task.review_instructions();">Review instructions</button>
+</DIV>
+
+<!-- SURVEY SECTION -->
+<DIV id="survey" style="display:none;" class="task_section">
+    
+    Were there any technical problems with the website? (required)<br>
+    <input type="radio" name="survey_radio_trouble" value="yes" class="survey_radio">Yes
+    <input type="radio" name="survey_radio_trouble" value="no">No<br>
+    If yes, please describe the problem as specifically as you can:<br>
+    <textarea id="survey_txt_trouble" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+    
+    Do you have any general comments? (optional)<br>
+    <textarea id="survey_txt_comments" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+
+<div id="check_survey" style="">
+	<button onclick="task.survey_finished();">Check survey</button>	
+</div>
+
+<div id="turk_form" style="display:none;">
+	<form name="myform" action="http://www.mturk.com/mturk/externalSubmit" method="POST">
+    	<input id="myid"     type="hidden" name="assignmentId" value="">
+    	<input id="data"     type="hidden" name="data" value="">
+    	<input type="submit" name="mysubmit" value="Submit">
+	</form>
+</div>
+
+</DIV>
+
+</body>                                                                 
+</html>

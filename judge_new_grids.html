@@ -1,0 +1,198 @@
+<html>                                                                  
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css" href="css/canvas.css"/>                                                                    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="exclude.js"></script>
+<script type="text/javascript" src="jquery.url.js"></script>
+<script type="text/javascript" src="extend_jquery.js"></script>
+<script type="text/javascript" src="taskutil.js"></script>
+<script type="text/javascript" src="image_preloader.js"></script>
+<script type="text/javascript" src="super_task.js"></script>
+<script type="text/javascript" src="sequential_task.js"></script>
+<script type="text/javascript" src="judge_task.js"></script>
+<script type="text/javascript" src="judge_new_grids.js"></script>
+</head>
+<body>
+
+<!-- PREAMBLE -->
+<span id="pre"></span>
+
+<!-- INSTRUCTIONS -->
+<DIV id="instruct"  style="" class="task_section">
+<div align="center">
+<h3>Visual Turing Test: Generating new exemplars</h3>
+</div>
+
+<p> The display below shows a handwritten character from a foreign alphabet.
+	We showed the "target image" of this character to 9 different people and asked them to draw a new example (with a computer mouse). We also gave this same task to a computer program, that simulates
+	how people draw a new character, and asked it to draw 9 different examples.</p>
+
+<p> Can you tell which grid of images was drawn by 9 different people, and which grid was drawn by the computer program? </p>
+
+<p> You will see a sequence of <span class="ntrials">N</span> displays just like this one below.
+	In each display, the computer program's grid of images is randomly chosen to appear either on the left or the right.
+	You will always be asked to indicate which grid the computer drew, using your keyboard's arrow keys.</p>
+	
+<p>	<span id="instruct_feedback">***</span>.
+	Please answer as accurately as you can. </p>
+
+<center><b>Sample display</b></center>
+<div id="demo_screen" align="center" style="border: 1px solid black;">
+<br>
+<table border="0">
+<tr>
+	<td><center>Target image</center></td>
+</tr>
+<tr>	
+	<td><div id="demo_itarget"></div></td>
+</tr>
+</table>
+<br>
+One grid has images drawn by 9 different people, and the other grid was drawn by a computer program.<br>
+<b>Which grid was drawn by the computer program?</b>
+<br><br>
+<table>
+<tr>
+	<td><div id="demo_ileft"></div></td>
+	<td><div id="demo_ispacer"></div></td>	
+	<td><div id="demo_iright"></div></td>
+</tr>
+</table>
+<br>
+Press &ltleft&gt or &ltright&gt using your arrow keys.
+<br><br>
+</div>
+
+<p><b>Images loaded: <span id="pload">0</span> percent.</b></p>
+<div align="center" id="toquiz" style="display:none;">
+<button onclick="task.start_quiz();">Continue</button>
+</div>
+<div align="center" id="return_exp" style="display:none;">
+	<br><br><div align="center" ><button onclick="task.return_to_exp();">Return to experiment</button></div>
+</div>
+</DIV>
+
+<!-- INSTRUCTIONS TEST -->
+
+<DIV id="instruct_test" style="display:none;" class="task_section">
+<FORM>
+<b>Instructions quiz.</b><br><br>
+
+The character in each display is<br>
+<input type="radio" name="q1" value="0" class="qq">a number<br>
+<input type="radio" name="q1" value="0">a letter from the English alphabet<br>
+<input type="radio" name="q1" value="1">a letter from a foreign alphabet<br>
+<input type="radio" name="q1" value="0">an Egyptian hieroglph<br><br>
+
+What were people instructed to do with the character in the "target image?"<br>
+<input type="radio" name="q2" value="0" class="qq">copy the target image exactly<br>
+<input type="radio" name="q2" value="0">draw a new character in the same style<br>
+<input type="radio" name="q2" value="1">draw a new example of the character<br><br>
+
+The two grids of images were drawn by<br>
+<input type="radio" name="q3" value="0" class="qq">people vs. aliens<br>
+<input type="radio" name="q3" value="0">adults vs. children<br>
+<input type="radio" name="q3" value="1">people vs. a computer program<br>
+<input type="radio" name="q3" value="0">two different computer programs<br><br>
+
+By pressing the arrow keys, you will always be asked to indicate the grid drawn by the<br>
+<input type="radio" name="q4" value="0" class="qq">people<br>
+<input type="radio" name="q4" value="0">aliens<br>
+<input type="radio" name="q4" value="1">computer program<br>
+<input type="radio" name="q4" value="0">children<br><br>
+
+Try to answer as<br>
+<input type="radio" name="q5" value="0" class="qq">quickly as you can<br>
+<input type="radio" name="q5" value="1">accurately as you can<br>
+
+</FORM>
+
+<button onclick="task.check_quiz();">Proceed to task.</button>
+</DIV>
+
+<!-- EXPERIMENT SECTION -->
+<DIV id="exp"  style="display:none;" class="task_section">
+
+<div align="center">
+<span id="header"></span><br><br>
+</div>
+
+<div id="screen" align="center" style="">
+<table border="0">
+<tr>
+	<td><center>Target image</center></td>
+</tr>
+<tr>	
+	<td><div id="itarget"></div></td>
+</tr>
+</table>
+<br>
+One grid has images drawn by 9 different people, and the other grid was drawn by a computer program.<br>
+<b>Which grid was drawn by the computer program?</b>
+<br><br>
+<table>
+<tr>
+	<td><div id="ileft"></div></td>
+	<td><div id="ispacer"></div></td>	
+	<td><div id="iright"></div></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<span id="message"></span><br>
+<span id="prompt"></span><br><br>
+<button onclick="task.review_instructions();">Review instructions</button>
+</div>
+
+</DIV>
+
+<!-- SURVEY SECTION -->
+<DIV id="survey" style="display:none;" class="task_section">
+	Your accuracy during the task was <b><span id="acc"></span> percent correct</b>.
+	<br><br>
+	What strategy did you use? How were the images drawn by the computer program
+	different than those drawn by humans? (required)<br>
+	<textarea id="survey_txt_strategy" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+	
+	What country do you currently reside in? (required)<br>
+    <input type="text" id="survey_txt_country" class="survey_txt"><br><br>
+	
+    Are you right-handed or left-handed? (required)<br>
+    <input type="radio" name="survey_radio_handed" value="right" class="survey_radio">right-handed
+    <input type="radio" name="survey_radio_handed" value="left">left-handed<br><br>
+
+	If you have more than one response to any of the following questions, please separate your responses by commas (,).
+	If you have no response, leave the text box blank.<br>
+	What is your native language? (required) <input type="text" id="survey_txt_native_lang" class="survey_txt"><br>
+	What other languages can you speak and write? <input type="text" id="survey_txt_write_lang" class="survey_txt"><br>
+	What other languages can you speak but not write? <input type="text" id="survey_txt_speak_lang" class="survey_txt"><br><br>
+
+    Were there any technical problems with the website? (required)<br>
+    <input type="radio" name="survey_radio_trouble" value="yes" class="survey_radio">Yes
+    <input type="radio" name="survey_radio_trouble" value="no">No<br>
+    If yes, please describe the problem as specifically as you can:<br>
+    <textarea id="survey_txt_trouble" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+    
+    Do you have any general comments? (optional)<br>
+    <textarea id="survey_txt_comments" rows="5" cols="50" class="survey_txt"></textarea><br><br>
+
+<div id="check_survey" style="">
+	<button onclick="task.survey_finished();">Check survey</button>	
+</div>
+
+<div id="turk_form" style="display:none;">
+	<form name="myform" id="myform" action="" method="POST">
+    	<input id="myid"     type="hidden" name="assignmentId" value="">
+    	<input id="data"     type="hidden" name="data" value="">
+    	<input type="submit" name="mysubmit" value="Submit">
+	</form>
+</div>
+
+</DIV>
+
+</body>                                                                 
+</html>
