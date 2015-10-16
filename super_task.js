@@ -257,7 +257,7 @@ var super_task = function (spec,my) {
     	    if (my.skip_survey || my.check_survey()) {
     	    	my.print_data_to_form();
     	    	if (my.debug_mode) { // debug mode..print the data
-    	    		$('#'+my.pre).html(my.txt + '<br><br>');
+    	    		$('#'+my.pre).html('Paste the following in to Matlab to analyze your data: <br><br>' + 'count=1; ' +  my.txt + '<br><br>');
     	    	}
     	    	else { // normal Mturk submission
     	    		alert('Survey is complete. Please press "Submit".');    	    		
