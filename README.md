@@ -1,12 +1,21 @@
-# visual-turing-tests
+# visual Turing tests
 
-*If you want to try the visual Turing tests, they are hosted and available here:*
+The repository contains code for "visual Turing tests" that test your ability to discriminate between human and machine behavior on several simple visual concept learning tasks.
+
+### Citing these experiments
+
+Please cite the following paper:
+
+Lake, Brenden M., Salakhutdinov, Ruslan, and Tenenbaum, Joshua B. (in press). Human-level concept learning through probabilistic program induction. _Science_.
+
+### Hosted version of the experiments
+
+If you are interested in trying the experiments, but you do not need the source code, you can access them at this link:
 
 http://cims.nyu.edu/~brenden/supplemental/turingtests/turingtests.html
 
-*What is in this repository?*
 
-This repo has the Javascript code and stimuli for the "visual Turing test" experiments described in the paper "Human-level concept learning through probabilistic program induction" and hosted above. 
+### Repository content
 
 This repo is only necessary if you want to download the full set of human and model produced images, or if you want to rerun the results reported in the paper on Mechanical Turk or elsewhere.
 
