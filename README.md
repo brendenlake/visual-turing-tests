@@ -6,7 +6,7 @@ The repository contains code for "visual Turing tests" that test your ability to
 
 Please cite the following paper:
 
-Lake, Brenden M., Salakhutdinov, Ruslan, and Tenenbaum, Joshua B. (in press). Human-level concept learning through probabilistic program induction. _Science_.
+[Lake, B. M., Salakhutdinov, R., and Tenenbaum, J. B. (2015). Human-level concept learning through probabilistic program induction.](http://www.sciencemag.org/content/350/6266/1332.short) _Science_, 350(6266), 1332-1338.
 
 ### Hosted version of the experiments
 
